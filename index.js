@@ -1,8 +1,7 @@
 // https://nodejs.org/docs/latest/api/process.html#processargv
-import { dirname } from 'node:path';
-import { argv } from 'node:process';
+import { argv } from 'process';
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
-import path from 'path';
+import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 //console.log(argv)
@@ -11,6 +10,7 @@ argv.forEach((val, index) => {
   console.log(`${index}: ${val}`);
 });
 
+// consiguiendo la ruta absoluta del proyecto
 const __dirname = dirname(fileURLToPath(import.meta.url))
 console.log(__dirname)
 
