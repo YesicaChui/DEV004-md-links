@@ -1,4 +1,4 @@
-// libreria del sistema de archivos
+// libreria nativa usado para leer archivos md
 import fs from 'fs'
 // libreria que permite convertir markdown(md) a html
 import {marked} from 'marked'
