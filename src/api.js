@@ -11,7 +11,9 @@ export const mdLinks = (path,options)=>new Promise((resolve, reject)=>{
   const arregloResultado = []
   // recorro cada etiqueta a
   for(const elemento of etiquetasA){
-    // agrego al arreglo vacio el objeto con el formato requerido href, text y file
+    // si no inicia con http pasamos a la siguiente vuelta
+    if(!elemento.href.startsWith("http")) continue
+        // agrego al arreglo vacio el objeto con el formato requerido href, text y file
     if(options.validate){
       //leer codigo de respuesta 
       const status = verificarCodigoEstadoHttp(elemento.href)
@@ -30,7 +32,8 @@ export const mdLinks = (path,options)=>new Promise((resolve, reject)=>{
       })
     }
   } 
-  resolve(filtrarObjetosHttp(arregloResultado)) 
+  // resolve(filtrarObjetosHttp(arregloResultado)) 
+  resolve(arregloResultado) 
 })
 /* 
 mdLinks("../testt.md")
