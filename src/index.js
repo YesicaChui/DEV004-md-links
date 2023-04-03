@@ -18,7 +18,7 @@ const CLI = () => {
       console.log(`${elemento.file} ${elemento.href} ${elemento.text}`)
     } 
     */
-    mdLinks(argv[2])
+    mdLinks(argv[2],{validate:false})
       .then((respuesta) => {
         // recorrer el arreglo de objetos e imprimirlo en el formato solicitado file, href y text
         for (const elemento of respuesta) {
@@ -31,7 +31,7 @@ const CLI = () => {
   } else if (argv[3] === '--stats') {
     // const arregloDeObjetos = mdLinks(argv[2])
     // console.log(`Total: ${arregloDeObjetos.length}`)
-    mdLinks(argv[2])
+    mdLinks(argv[2],{validate:false})
       .then((respuesta)=>console.log(`Total: ${respuesta.length}`))
       .catch(error=>console.log(error))
   } else {

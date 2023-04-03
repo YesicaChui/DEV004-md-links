@@ -4,26 +4,26 @@
 // crea un arreglo de objetos donde cada objeto tiene las claves href, text y file
 // filtra los links que inician con http
 // libreria que me permite usar las operaciones del dom sobre un texto con formato html
-import{ JSDOM } from 'jsdom'
+import { JSDOM } from 'jsdom'
 // libreria nativa usado para leer archivos md
 import fs from 'fs'
 // libreria que permite convertir markdown(md) a html
-import {marked} from 'marked'
+import { marked } from 'marked'
 
 
-export const leerArchivo = (ruta) =>{
- // leo el archivo md
- const contenidoArchivo = fs.readFileSync(ruta,'utf-8')
- return contenidoArchivo
+export const leerArchivo = (ruta) => {
+  // leo el archivo md
+  const contenidoArchivo = fs.readFileSync(ruta, 'utf-8')
+  return contenidoArchivo
 }
 
-export const convertirTextoMDEnHtml = (textoMD) =>{
-   // convierto texto md a html
-   const textoHtml = marked(textoMD)
-   return textoHtml
+export const convertirTextoMDEnHtml = (textoMD) => {
+  // convierto texto md a html
+  const textoHtml = marked(textoMD)
+  return textoHtml
 }
 
-export const seleccionarEtiquetasADeHtml = (textoHtml) =>{
+export const seleccionarEtiquetasADeHtml = (textoHtml) => {
   // genero nodos del DOM
   const dom = new JSDOM(textoHtml)
   // selecciono todas las etiquetas a
@@ -31,22 +31,33 @@ export const seleccionarEtiquetasADeHtml = (textoHtml) =>{
   return arregloEtiquetasA
 }
 
-export const filtrarObjetosHttp = (arregloObjetos) =>{
- // filtro solo los href que tengan http
- const arregloObjetosFiltrados = arregloObjetos.filter((elemento)=>elemento.href.startsWith("http"))
- // retorno el arreglo de objetos filtrados
+export const filtrarObjetosHttp = (arregloObjetos) => {
+  // filtro solo los href que tengan http
+  const arregloObjetosFiltrados = arregloObjetos.filter((elemento) => elemento.href.startsWith("http"))
+  // retorno el arreglo de objetos filtrados
   return arregloObjetosFiltrados
- }
+}
 
- export const verificarRuta = (ruta) =>{
+export const verificarRuta = (ruta) => {
   // retorno true si la ruta existe o false sino existe
   return fs.existsSync(ruta)
- }
+}
 
- export const verificarArchivoMD = (ruta) =>{ 
+export const verificarArchivoMD = (ruta) => {
   const nombreArchivo = ruta.split('/').pop(); // test.md
   const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
   // retorno true si la ruta existe o false sino existe
-
   return extensionArchivo === 'md'
- }
+}
+export const verificarCodigoEstadoHttp = (href) => {
+  const nombreArchivo = ruta.split('/').pop(); // test.md
+  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
+  // retorno true si la ruta existe o false sino existe
+  return extensionArchivo === 'md'
+}
+export const mensajeExito = (status) => {
+  const nombreArchivo = ruta.split('/').pop(); // test.md
+  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
+  // retorno true si la ruta existe o false sino existe
+  return extensionArchivo === 'md'
+}
