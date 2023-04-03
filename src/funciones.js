@@ -37,3 +37,16 @@ export const filtrarObjetosHttp = (arregloObjetos) =>{
  // retorno el arreglo de objetos filtrados
   return arregloObjetosFiltrados
  }
+
+ export const verificarRuta = (ruta) =>{
+  // retorno true si la ruta existe o false sino existe
+  return fs.existsSync(ruta)
+ }
+
+ export const verificarArchivoMD = (ruta) =>{ 
+  const nombreArchivo = ruta.split('/').pop(); // test.md
+  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
+  // retorno true si la ruta existe o false sino existe
+
+  return extensionArchivo === 'md'
+ }
