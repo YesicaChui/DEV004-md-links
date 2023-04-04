@@ -42,7 +42,9 @@ export const verificarArchivoMD = (ruta) => {
   // retorno true si la ruta existe o false sino existe
   return extensionArchivo === 'md'
 }
+
 export const verificarCodigoEstadoHttp = (href) => new Promise((resolve,reject)=>{
+  // en cualquier caso retorno resolve pero con fail en el catch
   axios.get(href)
   .then(response => resolve({status:response.status,ok:"ok"}))
   .catch(error => {
