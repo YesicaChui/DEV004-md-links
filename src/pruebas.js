@@ -7,8 +7,25 @@ import fs from 'fs'
 import{ JSDOM } from 'jsdom'
 // https://dustinpfister.github.io/2017/11/19/nodejs-marked/
 import {marked} from 'marked'
+import axios from 'axios';
 
-console.log(argv)
+
+axios.get("https://google.com/mascotas/karen.jpg")
+  .then(response => console.log(response.status))
+  .catch(error => {
+    if(error.response) console.log(error.response.status)
+    else console.log(404)
+  })
+
+
+// console.log(argv)
+
+/* fetch("https://google.com/mascota/karen.png")
+  .then((response)=>console.log("ok", response.status))
+  .catch((error)=> console.log("mi error", error, error.status, error.response.status)) */
+
+
+
 /* argv.forEach((val, index) => {
   console.log(`${index}: ${val}`);
 }); */

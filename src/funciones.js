@@ -9,7 +9,7 @@ import { JSDOM } from 'jsdom'
 import fs from 'fs'
 // libreria que permite convertir markdown(md) a html
 import { marked } from 'marked'
-
+import axios from 'axios';
 
 export const leerArchivo = (ruta) => {
   // leo el archivo md
@@ -45,16 +45,19 @@ export const verificarRuta = (ruta) => {
 
 export const verificarArchivoMD = (ruta) => {
   const nombreArchivo = ruta.split('/').pop(); // test.md
-  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
+  const extensionArchivo = nombreArchivo.split('.').pop(); // [test, md] ->pop()-->retorna md
   // retorno true si la ruta existe o false sino existe
   return extensionArchivo === 'md'
 }
-export const verificarCodigoEstadoHttp = (href) => {
-  const nombreArchivo = ruta.split('/').pop(); // test.md
-  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
-  // retorno true si la ruta existe o false sino existe
-  return extensionArchivo === 'md'
-}
+export const verificarCodigoEstadoHttp = (href) => new Promise((resolve,reject)=>{
+  axios.get(href)
+  .then(response => resolve({status:response.status,ok:"ok"}))
+  .catch(error => {
+    if(error.response) resolve({status:error.response.status, ok:"fail"})
+    else resolve({status:404, ok:"fail"})
+  })
+
+})
 export const mensajeExito = (status) => {
   const nombreArchivo = ruta.split('/').pop(); // test.md
   const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
