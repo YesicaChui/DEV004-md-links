@@ -1,8 +1,9 @@
-import { argv } from 'process';
-//console.log(argv)
-/* console.log(argv[2])
-console.log(argv[3])
-console.log(argv[4]) */
+/* function fib(n){
+  if(n==0) return 0
+  if(n==1) return 1
+  return fib(n-1)+fib(n-2)
+}
+console.log(fib(7)) */
 import Fs from 'fs';
 import Path from 'path';
 const traverseSync = dir => ({
@@ -14,4 +15,3 @@ const traverseSync = dir => ({
       : { path };
   })
 });
-console.log(traverseSync("../coverage"))

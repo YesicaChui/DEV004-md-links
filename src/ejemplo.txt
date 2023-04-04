@@ -1,0 +1,4 @@
+bueno [Node.js](https://nodejs.org/es/) es un entorno de ejecución(como aqui) para JavaScript
+construido con el [motor de JavaScript V8 de Chrome](https://developers.google.com/v8/).
+Esto nos va a permitir ejecutar JavaScript (el lenguaje de programacion) eso es todo
+

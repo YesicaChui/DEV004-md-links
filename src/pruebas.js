@@ -9,16 +9,19 @@ import{ JSDOM } from 'jsdom'
 import {marked} from 'marked'
 import axios from 'axios';
 
-
-axios.get("https://google.com/mascotas/karen.jpg")
+console.log(argv)
+console.log(argv[2])
+console.log(argv[3])
+console.log(argv[4])
+/* axios.get("https://google.com/mascotas/karen.jpg")
   .then(response => console.log(response.status))
   .catch(error => {
     if(error.response) console.log(error.response.status)
     else console.log(404)
-  })
+  }) */
 
 
-// console.log(argv)
+
 
 /* fetch("https://google.com/mascota/karen.png")
   .then((response)=>console.log("ok", response.status))
