@@ -31,13 +31,6 @@ export const seleccionarEtiquetasADeHtml = (textoHtml) => {
   return arregloEtiquetasA
 }
 
-export const filtrarObjetosHttp = (arregloObjetos) => {
-  // filtro solo los href que tengan http
-  const arregloObjetosFiltrados = arregloObjetos.filter((elemento) => elemento.href.startsWith("http"))
-  // retorno el arreglo de objetos filtrados
-  return arregloObjetosFiltrados
-}
-
 export const verificarRuta = (ruta) => {
   // retorno true si la ruta existe o false sino existe
   return fs.existsSync(ruta)
@@ -56,11 +49,4 @@ export const verificarCodigoEstadoHttp = (href) => new Promise((resolve,reject)=
     if(error.response) resolve({status:error.response.status, ok:"fail"})
     else resolve({status:404, ok:"fail"})
   })
-
 })
-export const mensajeExito = (status) => {
-  const nombreArchivo = ruta.split('/').pop(); // test.md
-  const extensionArchivo = ruta.split('.').pop(); // [test, md] ->pop()-->retorna md
-  // retorno true si la ruta existe o false sino existe
-  return extensionArchivo === 'md'
-}

@@ -1,7 +1,7 @@
 import {
-  convertirTextoMDEnHtml, filtrarObjetosHttp, leerArchivo,
+  convertirTextoMDEnHtml, leerArchivo,
   seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
-  verificarCodigoEstadoHttp, mensajeExito
+  verificarCodigoEstadoHttp
 } from './funciones.js'
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   if (!path) reject("no hay path")
