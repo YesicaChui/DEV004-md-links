@@ -49,7 +49,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
                   href: elemento.href,
                   text: elemento.textContent,
                   file: objetoContenido.ruta,
-                  linea: indices.join(","),
+                  line: indices.join("-"),
                   // uso el spread para desparramar el objeto estado donde estan status y ok
                   ...estado
                 })
@@ -62,7 +62,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
               href: elemento.href,
               text: elemento.textContent,
               file: objetoContenido.ruta,
-              linea: indices.join("-"),
+              line: indices.join("-"),
             })
           }
         }
@@ -79,10 +79,10 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
 
 
 
-mdLinks("../test.md", { validate: false })
+/* mdLinks("../test.md", { validate: false })
   .then((respuesta) => console.log(respuesta))
   .catch((error) => console.log(error))
-
+ */
 /* mdLinks('../src',{validate:true})
   .then((respuesta)=>console.log(respuesta))
   .catch((error)=>console.log(error)) */

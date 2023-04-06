@@ -19,7 +19,7 @@ const CLI = () => {
       .then((respuesta) => {
         // recorrer el arreglo de objetos e imprimirlo en el formato solicitado file, href y text
         for (const elemento of respuesta) {
-          console.log(`${elemento.file} ${elemento.href} ${elemento.text}`)
+          console.log(`${elemento.file} ${elemento.line} ${elemento.href} ${elemento.text}`)
         }
       })
       .catch((error) => console.log(error))
@@ -30,7 +30,7 @@ const CLI = () => {
       .then((respuesta) => {
         // recorrer el arreglo de objetos e imprimirlo en el formato solicitado file, href y text
         for (const elemento of respuesta) {
-          console.log(`${elemento.file} ${elemento.href} ${elemento.ok} ${elemento.status} ${elemento.text} `)
+          console.log(`${elemento.file} ${elemento.line} ${elemento.href} ${elemento.ok} ${elemento.status} ${elemento.text} `)
         }
       })
       .catch((error) => console.log(error))
