@@ -7,15 +7,28 @@ import { marked } from 'marked'
 import axios from 'axios';
 import path from 'path';
 
+/* leerArchivo Sincrono
+export const leerArchivo = (ruta) => {
+  // leo el archivo md
+  const contenidoArchivo = fs.readFileSync(ruta, 'utf-8')
+  console.log(contenidoArchivo.split(/\r?\n/)[0])
+  return contenidoArchivo
+} */
+
+
 // lectura asincrona de un archivo
 export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
   fs.promises.readFile(ruta, 'utf-8')
-    .then((contenidoArchivo) => resolve(
+    .then((contenidoArchivo) => {
+      const lineas = contenidoArchivo.split(/\r?\n/)
+      resolve(
       {
         "contenidoArchivoMD": contenidoArchivo,
-        "ruta": ruta
+        "ruta": ruta,
+        "lineas":lineas
       }
-    ))
+    )}
+    )
     .catch((error) => reject(error))
 })
 
