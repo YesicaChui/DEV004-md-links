@@ -110,12 +110,14 @@ export const convertirARutaAbsoluta = (ruta) => {
 
 export const buscarIndicesArregloSegunTexto = (arregloLineas, textoBuscar) => {
   // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
-  const indices = arregloLineas
+  // Creo un arreglo de lineas donde este la linea del texto a buscar sino pongo -1
+  const numerosDeLineas = arregloLineas
     .map((linea, index) =>
       linea.includes(textoBuscar) ? index + 1 : -1,
     )
+    // filtro solo los que son diferentes a -1
     .filter(element => element !== -1);
-  return indices
+  return numerosDeLineas
 }
 
 export const calcularCantidadUnique = (arregloObjetos) => {
@@ -128,9 +130,10 @@ export const calcularCantidadUnique = (arregloObjetos) => {
     // si no hay elementos que coincidan entonces lo agrego al arreglo Unique 
     if (existeHref.length === 0) arregloUnique.push(elemento)
   }
+  // retorono la cantidad de unique
   return arregloUnique.length
 }
 
-export const calcularCantidadBroken = (arregloObjetos)=>{
+export const calcularCantidadBroken = (arregloObjetos) => {
   return arregloObjetos.reduce((acumulador, elemento) => elemento.ok === 'fail' ? acumulador + 1 : acumulador, 0)
 }
