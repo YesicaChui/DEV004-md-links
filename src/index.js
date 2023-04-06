@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+// link para convertir a md-link
+// https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e
 // CLI
 // libreria nativa para leer argumentos de la terminal
 import { argv } from 'process'
@@ -67,7 +70,7 @@ const CLI = () => {
     })
     .catch(error => console.log(error))
   } else {
-    console.log("Error opcion no valida, pruebe con --stats o no ponga opciones")
+    console.log("Error opcion no valida, pruebe con --stats o --validate o no ponga opciones")
   }
 }
 

@@ -10,8 +10,19 @@ import path from 'path';
 export const leerArchivo = (ruta) => {
   // leo el archivo md
   const contenidoArchivo = fs.readFileSync(ruta, 'utf-8')
+  console.log(contenidoArchivo.split(/\r?\n/)[0])
   return contenidoArchivo
 }
+
+/* export const leerArchivo = (ruta) => new Promise((resolve, reject)=>{
+  // leo el archivo md
+  //const contenidoArchivo = fs.readFileSync(ruta, 'utf-8')
+  fs.promises.readFile(ruta,'utf-8')
+    .then((contenidoArchivo)=>resolve(contenidoArchivo))
+    .catch((error)=>reject(error))
+ // console.log(contenidoArchivo.split(/\r?\n/)[1])
+  
+}) */
 
 export const convertirTextoMDEnHtml = (textoMD) => {
   // convierto texto md a html
@@ -35,7 +46,7 @@ export const verificarRuta = (ruta) => {
 export const verificarArchivoMD = (ruta) => {
   const nombreArchivo = ruta.split('/').pop(); // test.md
   const extensionArchivo = nombreArchivo.split('.').pop(); // [test, md] ->pop()-->retorna md
-  // retorno true si la ruta existe o false sino existe
+  // retorno true si el archivo es de extension md
   return extensionArchivo === 'md'
 }
 
@@ -53,26 +64,37 @@ export const verificarCodigoEstadoHttp = (href) => new Promise((resolve,reject)=
 })
 
 export const obtenerArchivos=(ruta)=>{
+  // guardo los archivos en el arreglo de archivos
   let arregloArchivos=[]
   if(esDirectorio(ruta)){
+    // leo las rutas del directorio
     const rutas =leerDirectorio(ruta)
+    // a cada ruta verifico si hay más directorios de forma recursiva
     for(const elemento of rutas){
+      // concateno el arreglo de archivos con el arreglo resultado de la recursividad en el directorio
       arregloArchivos=arregloArchivos.concat(obtenerArchivos(elemento))
     }
   }else{
+    // caso base, si no es directorio es un archivo y retorno el arreglo con un solo archivo
     arregloArchivos.push(ruta)
   }
   return arregloArchivos
 }
 
 export const esDirectorio =(ruta)=>{ //../desarrollo/laboratoria/yesica
+  // leo el estado de la ruta
   const stats = fs.statSync(ruta);
+  // retorno true si es directorio
   return stats.isDirectory()
 }
 
 export const leerDirectorio=(ruta)=>{
+  // leo el directorio y le añado a cada archivo la ruta inicial
   return fs.readdirSync(ruta).map(file =>path.join(ruta,file))
 }
 //console.log(obtenerArchivos("..//node_modules"))
 
-//console.log(esDirectorio("../hola"))
+// console.log(esDirectorio("../test.md"))
+
+/* console.log(seleccionarEtiquetasADeHtml(`<a href="https://httpbin.org/redirect-to">karencita</a>
+<a href="https://google.com/mascotas/karen.jpg">linda gatita</a>`)[0].textContent) */

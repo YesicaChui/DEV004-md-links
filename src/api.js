@@ -11,14 +11,15 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   const arregloResultado = []
   // genero el arreglo de promesas
   const promesasHttp = []
-  // recorro cada etiqueta a
+ // obtenengo los archivos si es un directorio en un arreglo
   const arrayArchivos=obtenerArchivos(path)
+  // recorro todas las rutas del arreglo de archivos
   for(const ruta of arrayArchivos){
     if (!verificarArchivoMD(ruta)) continue
     const contenido = leerArchivo(ruta)
     const textoHtml = convertirTextoMDEnHtml(contenido)
     const etiquetasA = seleccionarEtiquetasADeHtml(textoHtml)
-  
+   // recorro cada etiqueta a
     for (const elemento of etiquetasA) {
       // si no inicia con http pasamos a la siguiente vuelta
       if (!elemento.href.startsWith("http")) continue
