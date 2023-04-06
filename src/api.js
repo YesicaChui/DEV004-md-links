@@ -2,12 +2,13 @@ import {
   convertirTextoMDEnHtml, leerArchivo,
   seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
   verificarCodigoEstadoHttp,
-  obtenerArchivos
+  obtenerArchivos,convertirARutaAbsoluta
 } from './funciones.js'
 
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   if (!path) reject("no hay path")
-  if (!verificarRuta(path)) reject("ruta invalida verifique si la ruta es correcta")
+  if (!verificarRuta(path)) reject("ruta invalida verifique si la ruta es correcta si es absoluta considere poner \\\\")
+  path = convertirARutaAbsoluta(path)
   const arregloResultado = []
   // genero el arreglo de promesas http
   const promesasHttp = []
@@ -35,7 +36,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
           // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
           const indices = objetoContenido.lineas
             .map((linea, index) =>
-              linea.includes(elemento.href) ? index+1 : -1,
+              linea.includes(elemento.href) ? index + 1 : -1,
             )
             .filter(element => element !== -1);
 

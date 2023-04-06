@@ -6,6 +6,7 @@ import fs from 'fs'
 import { marked } from 'marked'
 import axios from 'axios';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 /* leerArchivo Sincrono
 export const leerArchivo = (ruta) => {
@@ -22,12 +23,13 @@ export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
     .then((contenidoArchivo) => {
       const lineas = contenidoArchivo.split(/\r?\n/)
       resolve(
-      {
-        "contenidoArchivoMD": contenidoArchivo,
-        "ruta": ruta,
-        "lineas":lineas
-      }
-    )}
+        {
+          "contenidoArchivoMD": contenidoArchivo,
+          "ruta": ruta,
+          "lineas": lineas
+        }
+      )
+    }
     )
     .catch((error) => reject(error))
 })
@@ -100,6 +102,21 @@ export const leerDirectorio = (ruta) => {
   // leo el directorio y le añado a cada archivo la ruta inicial
   return fs.readdirSync(ruta).map(file => path.join(ruta, file))
 }
+
+export const convertirARutaAbsoluta = (ruta) => {
+
+  if (!path.isAbsolute(ruta)) {
+    // consiguiendo la ruta absoluta del proyecto
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+    // uniendo ruta absoluta con la ruta relativa
+    const rutaAbsoluta = path.join(__dirname, ruta)
+    return rutaAbsoluta
+  } else {
+    return ruta
+  }
+}
+
+// console.log(convertirARutaAbsoluta("../test.md"))
 //console.log(obtenerArchivos("..//node_modules"))
 
 // console.log(esDirectorio("../test.md"))

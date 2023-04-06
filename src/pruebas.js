@@ -1,18 +1,25 @@
 // https://nodejs.org/docs/latest/api/process.html#processargv
 import { argv } from 'process';
 // https://flaviocopes.com/fix-dirname-not-defined-es-module-scope/
-import { dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs'
 import{ JSDOM } from 'jsdom'
 // https://dustinpfister.github.io/2017/11/19/nodejs-marked/
 import {marked} from 'marked'
 import axios from 'axios';
+//import path from 'path';
 
-console.log(argv)
+// consiguiendo la ruta absoluta del proyecto
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+console.log(__dirname)
+
+const mipath = "./test.md"
+console.log(path.join(__dirname,mipath))
+/* console.log(argv)
 console.log(argv[2])
 console.log(argv[3])
-console.log(argv[4])
+console.log(argv[4]) */
 /* axios.get("https://google.com/mascotas/karen.jpg")
   .then(response => console.log(response.status))
   .catch(error => {
@@ -33,9 +40,7 @@ console.log(argv[4])
   console.log(`${index}: ${val}`);
 }); */
 
-// consiguiendo la ruta absoluta del proyecto
-/* const __dirname = dirname(fileURLToPath(import.meta.url))
-console.log(__dirname) */
+
 
 
 //fs.writeFileSync('./ejemplo.txt', 'hola karen!!!')
