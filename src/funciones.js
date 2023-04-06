@@ -116,6 +116,16 @@ export const convertirARutaAbsoluta = (ruta) => {
   }
 }
 
+export const buscarIndicesArregloSegunTexto = (arregloLineas, textoBuscar)=>{
+  // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
+  const indices = arregloLineas
+    .map((linea, index) =>
+      linea.includes(textoBuscar) ? index + 1 : -1,
+    )
+    .filter(element => element !== -1);
+  return indices
+}
+
 // console.log(convertirARutaAbsoluta("../test.md"))
 //console.log(obtenerArchivos("..//node_modules"))
 

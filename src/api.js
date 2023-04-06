@@ -2,7 +2,7 @@ import {
   convertirTextoMDEnHtml, leerArchivo,
   seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
   verificarCodigoEstadoHttp,
-  obtenerArchivos,convertirARutaAbsoluta
+  obtenerArchivos,convertirARutaAbsoluta,buscarIndicesArregloSegunTexto
 } from './funciones.js'
 
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
@@ -32,14 +32,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
         for (const elemento of etiquetasA) {
           // si no inicia con http pasamos a la siguiente vuelta
           if (!elemento.href.startsWith("http")) continue
-          // const linea = objetoContenido.lineas.findIndex((linea)=>linea.includes(elemento.href))+1
-          // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
-          const indices = objetoContenido.lineas
-            .map((linea, index) =>
-              linea.includes(elemento.href) ? index + 1 : -1,
-            )
-            .filter(element => element !== -1);
-
+          const indices = buscarIndicesArregloSegunTexto(objetoContenido.lineas,elemento.href)
           // si es true validate analizo el codigo de estado(status) y el ok
           if (options.validate) {
             // verifico el codigo de respuesta y el ok para cada link
