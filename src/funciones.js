@@ -8,15 +8,6 @@ import axios from 'axios';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-/* leerArchivo Sincrono
-export const leerArchivo = (ruta) => {
-  // leo el archivo md
-  const contenidoArchivo = fs.readFileSync(ruta, 'utf-8')
-  console.log(contenidoArchivo.split(/\r?\n/)[0])
-  return contenidoArchivo
-} */
-
-
 // lectura asincrona de un archivo
 export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
   fs.promises.readFile(ruta, 'utf-8')
@@ -112,11 +103,12 @@ export const convertirARutaAbsoluta = (ruta) => {
     const rutaAbsoluta = path.join(__dirname, ruta)
     return rutaAbsoluta
   } else {
+    // si no es ruta relativa devuelvo la misma ruta
     return ruta
   }
 }
 
-export const buscarIndicesArregloSegunTexto = (arregloLineas, textoBuscar)=>{
+export const buscarIndicesArregloSegunTexto = (arregloLineas, textoBuscar) => {
   // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
   const indices = arregloLineas
     .map((linea, index) =>
@@ -126,10 +118,19 @@ export const buscarIndicesArregloSegunTexto = (arregloLineas, textoBuscar)=>{
   return indices
 }
 
-// console.log(convertirARutaAbsoluta("../test.md"))
-//console.log(obtenerArchivos("..//node_modules"))
+export const calcularCantidadUnique = (arregloObjetos) => {
+  // genero arreglo Unique vacio
+  const arregloUnique = []
+  // recorro el arreglo de respuestas
+  for (const elemento of arregloObjetos) {
+    // filtro si hay algun elemento en arregloUnique que coincida con el objeto en su propiedad href
+    const existeHref = arregloUnique.filter((elementoUnique) => elementoUnique.href === elemento.href)
+    // si no hay elementos que coincidan entonces lo agrego al arreglo Unique 
+    if (existeHref.length === 0) arregloUnique.push(elemento)
+  }
+  return arregloUnique.length
+}
 
-// console.log(esDirectorio("../test.md"))
-
-/* console.log(seleccionarEtiquetasADeHtml(`<a href="https://httpbin.org/redirect-to">karencita</a>
-<a href="https://google.com/mascotas/karen.jpg">linda gatita</a>`)[0].textContent) */
+export const calcularCantidadBroken = (arregloObjetos)=>{
+  return arregloObjetos.reduce((acumulador, elemento) => elemento.ok === 'fail' ? acumulador + 1 : acumulador, 0)
+}
