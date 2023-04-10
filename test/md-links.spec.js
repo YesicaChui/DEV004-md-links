@@ -1,4 +1,3 @@
-//const mdLinks = require('../');
 import { esDirectorio, convertirTextoMDEnHtml, verificarArchivoMD, seleccionarEtiquetasADeHtml } from '../src/funciones.js'
 import fs from 'fs'
 // https://stackoverflow.com/questions/50066138/mock-fs-function-with-jest

@@ -19,10 +19,11 @@
   "scripts": {
     "test": "jest --coverage"
   },
-  "bin":{
-    "md-links":"./src/index.js"
+  "bin": {
+    "md-links": "./src/index.js"
   },
   "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.21.2"
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "eslint": "^8.38.0"
   }
 }
