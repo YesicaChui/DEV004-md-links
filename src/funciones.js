@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
   fs.promises.readFile(ruta, 'utf-8')
     .then((contenidoArchivo) => {
-      const lineas = contenidoArchivo.split(/\r?\n/)
+      const lineas = contenidoArchivo.split('\n')
       resolve(
         {
           "contenidoArchivoMD": contenidoArchivo,
@@ -97,8 +97,13 @@ export const leerDirectorio = (ruta) => {
 export const convertirARutaAbsoluta = (ruta) => {
 
   if (!path.isAbsolute(ruta)) {
-    // consiguiendo la ruta absoluta del proyecto
-    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+    // process.cwd(): El process.cwd()método devuelve el directorio de trabajo actual del proceso de Node.js.
+    // El método path.resolve() resuelve una secuencia de rutas o segmentos de ruta en una ruta absoluta.
+    // https://openbase.com/js/@yummy/dotenv/documentation
+    // https://www.jianshu.com/p/9d213734d881
+    // https://www.jianshu.com/p/9c086a551e52
+
+    const __dirname = path.resolve(process.cwd());
     // uniendo ruta absoluta con la ruta relativa
     const rutaAbsoluta = path.join(__dirname, ruta)
     return rutaAbsoluta
