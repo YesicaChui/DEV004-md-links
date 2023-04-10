@@ -6,7 +6,6 @@ import fs from 'fs'
 import { marked } from 'marked'
 import axios from 'axios';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 // lectura asincrona de un archivo
 export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
@@ -51,7 +50,7 @@ export const verificarArchivoMD = (ruta) => {
   return extensionArchivo === 'md'
 }
 
-export const verificarCodigoEstadoHttp = (href) => new Promise((resolve, reject) => {
+export const verificarCodigoEstadoHttp = (href) => new Promise((resolve) => {
   // en cualquier caso retorno resolve pero con fail en el catch
   axios.get(href)
     .then(response => resolve({ status: response.status, ok: "ok" }))
