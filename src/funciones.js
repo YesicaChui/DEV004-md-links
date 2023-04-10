@@ -99,6 +99,7 @@ export const convertirARutaAbsoluta = (ruta) => {
   if (!path.isAbsolute(ruta)) {
     // process.cwd(): El process.cwd()método devuelve el directorio de trabajo actual del proceso de Node.js.
     // El método path.resolve() resuelve una secuencia de rutas o segmentos de ruta en una ruta absoluta.
+    // https://www.geeksforgeeks.org/difference-between-process-cwd-and-__dirname-in-node-js/
     // https://openbase.com/js/@yummy/dotenv/documentation
     // https://www.jianshu.com/p/9d213734d881
     // https://www.jianshu.com/p/9c086a551e52
