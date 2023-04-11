@@ -1,4 +1,9 @@
-import { leerDirectorio, obtenerArchivos, verificarCodigoEstadoHttp, verificarRuta, leerArchivo, esDirectorio, convertirTextoMDEnHtml, verificarArchivoMD, seleccionarEtiquetasADeHtml } from '../src/funciones.js'
+import {
+  convertirARutaAbsoluta, leerDirectorio, obtenerArchivos, verificarCodigoEstadoHttp,
+  verificarRuta, leerArchivo, esDirectorio, convertirTextoMDEnHtml, verificarArchivoMD,
+  seleccionarEtiquetasADeHtml, buscarTextoEnLineas, calcularCantidadUnique, calcularCantidadBroken
+} from '../src/funciones.js'
+import path from 'path';
 // https://stackoverflow.com/questions/50066138/mock-fs-function-with-jest
 // jest.mock('fs');
 
@@ -98,7 +103,7 @@ describe('verificarCodigoEstadoHttp', () => {
 
   it('Se entrega la ruta una pagina que funciona debe resolver un objeto con las claves status y ok con los valores 200 y "ok" ', (done) => {
     verificarCodigoEstadoHttp("https://www.google.com/")
-      .then((res)=>{
+      .then((res) => {
         expect(res).toStrictEqual({ status: 200, ok: "ok" })
         done()
       })
@@ -106,7 +111,7 @@ describe('verificarCodigoEstadoHttp', () => {
 
   it('Se entrega la direccion de un dominio valido con una ruta que no existe debe resolver un objeto con las claves status y ok con los valores 404 y "fail" ', (done) => {
     verificarCodigoEstadoHttp("https://google.com/mascotas/karen.jpg")
-      .then((res)=>{
+      .then((res) => {
         expect(res).toStrictEqual({ status: 404, ok: "fail" })
         done()
       })
@@ -114,7 +119,7 @@ describe('verificarCodigoEstadoHttp', () => {
 
   it('Se entrega la direccion de un dominio que no existe debe resolver un objeto con las claves status y ok con los valores 404 y "fail" ', (done) => {
     verificarCodigoEstadoHttp("https://karencitaDurmiente.com/mascotas/karen.jpg")
-      .then((res)=>{
+      .then((res) => {
         expect(res).toStrictEqual({ status: 404, ok: "fail" })
         done()
       })
@@ -126,8 +131,13 @@ describe('obtenerArchivos', () => {
     expect(typeof obtenerArchivos).toBe('function')
   });
 
-  it('Se entrega una ruta de una carpeta y retorna un arreglo con las rutas de todos los archivos encontrados', () => {
-    expect(obtenerArchivos("test")).toStrictEqual(['test\\.eslintrc','test\\md-links.spec.js'])
+  it('Se entrega una ruta de una carpeta y retorna un arreglo con las rutas de todos los archivos encontrados incluyendo los archivos de las subcarpetas', () => {
+    expect(obtenerArchivos("test")).toStrictEqual([
+      'test\\.eslintrc',
+      'test\\md-links.spec.js',
+      'test\\prueba\\pruebatest.md',
+      'test\\prueba\\pruebatest1.md'
+    ])
   })
 });
 
@@ -153,13 +163,98 @@ describe('leerDirectorio', () => {
   });
 
   it('Se entrega una ruta de un directorio retorna las rutas de archivos y carpetas del directorio sin ingresar a las subcarpetas', () => {
-    expect(leerDirectorio("test")).toStrictEqual(['test\\.eslintrc','test\\md-links.spec.js', 'test\\prueba'])
+    expect(leerDirectorio("test")).toStrictEqual([
+      'test\\.eslintrc',
+      'test\\md-links.spec.js',
+      'test\\prueba'
+    ])
+  })
+});
+
+describe('convertirARutaAbsoluta', () => {
+  it('esto debe ser una funcion', () => {
+    expect(typeof convertirARutaAbsoluta).toBe('function')
+  });
+
+  it('Se entrega una ruta relativa y retorna su ruta absoluta', () => {
+    expect(path.isAbsolute(convertirARutaAbsoluta("./test.md"))).toBe(true)
+  })
+
+  it('Se entrega una ruta absoluta y retorna la misma ruta absoluta', () => {
+    expect(convertirARutaAbsoluta(process.cwd())).toBe(process.cwd())
+  })
+});
+
+
+describe('buscarTextoEnLineas', () => {
+  it('esto debe ser una funcion', () => {
+    expect(typeof buscarTextoEnLineas).toBe('function')
+  });
+
+  it('Se entrega un arreglo con textos y un texto a buscar retorna un arreglo con las posiciones donde este el texto a buscar', () => {
+    expect(buscarTextoEnLineas([
+      'hola como estas karen',
+      'mi bella genio interesante',
+      'karen la durmiente',
+      'el libro esta interesante',
+      'karen bonita'
+    ],'karen')).toStrictEqual([1,3,5])
+  })
+
+});
+
+describe('calcularCantidadUnique', () => {
+  it('esto debe ser una funcion', () => {
+    expect(typeof calcularCantidadUnique).toBe('function')
+  });
+
+  it('Sen entrega un arreglo de objetos con links y retorna la cantidad de links unicos que hay', () => {
+    expect(calcularCantidadUnique([
+      {
+        href:"www.google.com",
+        text:"durmiente"
+      },
+      {
+        href:"www.facebook.com",
+        text:"durmiente bonita"
+      },
+      {
+        href:"www.facebook.com",
+        text:"chuki"
+      },
+      {
+        href:"www.google.com",
+        text:"molestosa"
+      },
+    ])).toBe(2)
   })
 
 });
 
 
+describe('calcularCantidadBroken', () => {
+  it('esto debe ser una funcion', () => {
+    expect(typeof calcularCantidadBroken).toBe('function')
+  });
 
-
-
-
+  it('Se entrega un arreglo de objetos que tienen la clave ok y retorna cuantos valores fail hay en ok ', () => {
+    expect(calcularCantidadBroken([
+      {
+        href:"www.google.com",
+        ok:"fail"
+      },
+      {
+        href:"www.facebook.com",
+        ok:"fail"
+      },
+      {
+        href:"www.twitter.com",
+        ok:"ok"
+      },
+      {
+        href:"www.linkedin.com",
+        ok:"fail"
+      },
+    ])).toBe(3)
+  })
+});

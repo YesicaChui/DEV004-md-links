@@ -2,7 +2,7 @@ import {
   convertirTextoMDEnHtml, leerArchivo,
   seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
   verificarCodigoEstadoHttp,
-  obtenerArchivos,convertirARutaAbsoluta,buscarIndicesArregloSegunTexto
+  obtenerArchivos,convertirARutaAbsoluta,buscarTextoEnLineas
 } from './funciones.js'
 
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
           if (!elemento.href.startsWith("http")) continue
           // busco los indices donde este el link para conseguir 
           // el arreglo donde indique la linea o lineas donde se encontro
-          const lineas = buscarIndicesArregloSegunTexto(objetoContenido.lineas,elemento.href)
+          const lineas = buscarTextoEnLineas(objetoContenido.lineas,elemento.href)
           // si es true validate analizo el codigo de estado(status) y el ok
           if (options.validate) {
             // verifico el codigo de respuesta y el ok para cada link
