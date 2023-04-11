@@ -24,11 +24,16 @@ export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
     .catch((error) => reject(error))
 })
 
+/* leerArchivo("./pruebatestNoExiste.md")
+  .catch(error=>console.log(!!error.message)) */
+
 export const convertirTextoMDEnHtml = (textoMD) => {
   // convierto texto md a html
   const textoHtml = marked(textoMD)
   return textoHtml
 }
+
+// console.log(convertirTextoMDEnHtml(`bueno [Node.js](https://nodejs.org/es/)`))
 
 export const seleccionarEtiquetasADeHtml = (textoHtml) => {
   // genero nodos del DOM
@@ -37,6 +42,7 @@ export const seleccionarEtiquetasADeHtml = (textoHtml) => {
   const arregloEtiquetasA = dom.window.document.querySelectorAll("a")
   return arregloEtiquetasA
 }
+
 
 export const verificarRuta = (ruta) => {
   // retorno true si la ruta existe o false sino existe
@@ -56,9 +62,9 @@ export const verificarCodigoEstadoHttp = (href) => new Promise((resolve) => {
     .then(response => resolve({ status: response.status, ok: "ok" }))
     // si el codigo es de 400 para arriba
     .catch(error => {
-      // respuesta del servidor
+      // respuesta del servidor existe servidor(dominio) pero ruta no existe u otro error
       if (error.response) resolve({ status: error.response.status, ok: "fail" })
-      // respuesta personalizada si falla
+      // respuesta personalizada si falla (o no existe el dominio o servidor)
       else resolve({ status: 404, ok: "fail" })
     })
 })
@@ -81,6 +87,7 @@ export const obtenerArchivos = (ruta) => {
   return arregloArchivos
 }
 
+
 export const esDirectorio = (ruta) => { //../desarrollo/laboratoria/yesica
   // leo el estado de la ruta
   const stats = fs.statSync(ruta);
@@ -92,6 +99,10 @@ export const leerDirectorio = (ruta) => {
   // leo el directorio y le añado a cada archivo la ruta inicial
   return fs.readdirSync(ruta).map(file => path.join(ruta, file))
 }
+
+/* console.log(leerDirectorio("../src"))
+console.log("-----------")
+console.log(obtenerArchivos("../src")) */
 
 export const convertirARutaAbsoluta = (ruta) => {
 
@@ -142,3 +153,6 @@ export const calcularCantidadUnique = (arregloObjetos) => {
 export const calcularCantidadBroken = (arregloObjetos) => {
   return arregloObjetos.reduce((acumulador, elemento) => elemento.ok === 'fail' ? acumulador + 1 : acumulador, 0)
 }
+
+
+// console.log(obtenerArchivos("../src"))

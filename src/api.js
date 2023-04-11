@@ -42,7 +42,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
             // verifico el codigo de respuesta y el ok para cada link
             const promesa = verificarCodigoEstadoHttp(elemento.href)
               .then(estado => {
-                //indicar fail u ok segundo codigo http          
+                // indicar fail u ok segundo codigo http          
                 arregloResultado.push({
                   href: elemento.href,
                   text: elemento.textContent,
