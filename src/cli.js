@@ -5,7 +5,7 @@
 // libreria nativa para leer argumentos de la terminal
 import { argv } from 'process'
 // importo la api de mdLinks
-import { mdLinks } from './api.js'
+import { mdLinks } from '../index.js'
 import { calcularCantidadBroken, calcularCantidadUnique } from './funciones.js'
 
 

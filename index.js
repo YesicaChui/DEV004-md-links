@@ -3,7 +3,7 @@ import {
   seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
   verificarCodigoEstadoHttp,
   obtenerArchivos,convertirARutaAbsoluta,buscarTextoEnLineas
-} from './funciones.js'
+} from './src/funciones.js'
 
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   if (!path) reject("no hay path")

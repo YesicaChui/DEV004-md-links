@@ -22,7 +22,7 @@
     "pretest": "npm run eslint"
   },
   "bin": {
-    "md-links": "./src/index.js"
+    "md-links": "./src/cli.js"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
