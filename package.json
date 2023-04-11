@@ -17,13 +17,17 @@
     "marked": "^4.3.0"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "eslint": "eslint --ext .js src/ test/",
+    "pretest": "npm run eslint"
   },
   "bin": {
     "md-links": "./src/index.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.4",
     "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "babel-jest": "^29.5.0",
     "eslint": "^8.38.0"
   }
 }

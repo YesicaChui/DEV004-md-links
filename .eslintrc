@@ -1,8 +1,13 @@
+// https://stackoverflow.com/questions/36367656/eslint-sourcetype-mixture-of-script-and-module
+// https://stackoverflow.com/questions/36001552/eslint-parsing-error-unexpected-token
 {
   "env": {
     "node": true
   },
+  "globals": { "Promise": "readonly" },
+  "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": 8
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   }
 }
