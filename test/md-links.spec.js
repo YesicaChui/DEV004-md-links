@@ -208,7 +208,7 @@ describe('calcularCantidadUnique', () => {
     expect(typeof calcularCantidadUnique).toBe('function')
   });
 
-  it('Sen entrega un arreglo de objetos con links y retorna la cantidad de links unicos que hay', () => {
+  it('Se entrega un arreglo de objetos con links y retorna la cantidad de links unicos que hay', () => {
     expect(calcularCantidadUnique([
       {
         href:"www.google.com",
@@ -237,7 +237,7 @@ describe('calcularCantidadBroken', () => {
     expect(typeof calcularCantidadBroken).toBe('function')
   });
 
-  it('Se entrega un arreglo de objetos que tienen la clave ok y retorna cuantos valores fail hay en ok ', () => {
+  it('Se entrega un arreglo de objetos que tienen la clave ok y retorna la cantidad de valores fail que hay en ok ', () => {
     expect(calcularCantidadBroken([
       {
         href:"www.google.com",

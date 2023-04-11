@@ -24,16 +24,12 @@ export const leerArchivo = (ruta) => new Promise((resolve, reject) => {
     .catch((error) => reject(error))
 })
 
-/* leerArchivo("./pruebatestNoExiste.md")
-  .catch(error=>console.log(!!error.message)) */
 
 export const convertirTextoMDEnHtml = (textoMD) => {
   // convierto texto md a html
   const textoHtml = marked(textoMD)
   return textoHtml
 }
-
-// console.log(convertirTextoMDEnHtml(`bueno [Node.js](https://nodejs.org/es/)`))
 
 export const seleccionarEtiquetasADeHtml = (textoHtml) => {
   // genero nodos del DOM
@@ -100,10 +96,6 @@ export const leerDirectorio = (ruta) => {
   return fs.readdirSync(ruta).map(file => path.join(ruta, file))
 }
 
-/* console.log(leerDirectorio("../test"))
-console.log("-----------")
-console.log(obtenerArchivos("../test")) */
-
 export const convertirARutaAbsoluta = (ruta) => {
 
   if (!path.isAbsolute(ruta)) {
@@ -124,9 +116,6 @@ export const convertirARutaAbsoluta = (ruta) => {
   }
 }
 
-/* console.log(process.cwd())
- console.log(convertirARutaAbsoluta(process.cwd())) */
-
 export const buscarTextoEnLineas = (arregloLineas, textoBuscar) => {
   // https://bobbyhadz.com/blog/javascript-find-index-all-occurrences-of-element-in-array
   // Creo un arreglo de lineas donde este la linea del texto a buscar sino pongo -1
@@ -138,15 +127,6 @@ export const buscarTextoEnLineas = (arregloLineas, textoBuscar) => {
     .filter(element => element !== -1);
   return numerosDeLineas
 }
-
-/* console.log(buscarTextoEnLineas([
-  'hola como estan karen',
-  'mi bella genio interesante',
-  'karen la durmiente',
-  'el libro esta interesante',
-  'karen bonita'
-], 'libro')) */
-
 
 export const calcularCantidadUnique = (arregloObjetos) => {
   // genero arreglo Unique vacio
@@ -162,47 +142,6 @@ export const calcularCantidadUnique = (arregloObjetos) => {
   return arregloUnique.length
 }
 
-/* console.log(calcularCantidadUnique([
-  {
-    href:"www.google.com",
-    text:"durmiente"
-  },
-  {
-    href:"www.facebook.com",
-    text:"durmiente bonita"
-  },
-  {
-    href:"www.facebook.com",
-    text:"chuki"
-  },
-  {
-    href:"www.google.com",
-    text:"molestosa"
-  },
-])) */
-
 export const calcularCantidadBroken = (arregloObjetos) => {
   return arregloObjetos.reduce((acumulador, elemento) => elemento.ok === 'fail' ? acumulador + 1 : acumulador, 0)
 }
-
-/* console.log(calcularCantidadBroken([
-  {
-    href:"www.google.com",
-    ok:"fail"
-  },
-  {
-    href:"www.facebook.com",
-    ok:"fail"
-  },
-  {
-    href:"www.twitter.com",
-    ok:"ok"
-  },
-  {
-    href:"www.linkedin.com",
-    ok:"fail"
-  },
-])) */
-
-
-// console.log(obtenerArchivos("../src"))
