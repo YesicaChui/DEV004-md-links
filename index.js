@@ -1,13 +1,13 @@
 import {
   convertirTextoMDEnHtml, leerArchivo,
-  seleccionarEtiquetasADeHtml, verificarRuta, verificarArchivoMD,
+  seleccionarEtiquetasADeHtml, existeRuta, esArchivoMD,
   verificarCodigoEstadoHttp,
   obtenerArchivos,convertirARutaAbsoluta,buscarTextoEnLineas
 } from './src/funciones.js'
 
 export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   if (!path) reject("no hay path")
-  if (!verificarRuta(path)) reject("ruta invalida verifique si la ruta es correcta si es absoluta considere poner \\\\")
+  if (!existeRuta(path)) reject("ruta invalida verifique si la ruta es correcta si es absoluta considere poner \\\\")
   path = convertirARutaAbsoluta(path)
   // arreglo donde estaran todos los objetos segur se requiera
   const arregloResultado = []
@@ -19,7 +19,7 @@ export const mdLinks = (path, options) => new Promise((resolve, reject) => {
   const arrayArchivos = obtenerArchivos(path)
   // recorro todas las rutas obtenidas y genero un arreglo de promesas de lectura de archivo
   for (const ruta of arrayArchivos) {
-    if (!verificarArchivoMD(ruta)) continue
+    if (!esArchivoMD(ruta)) continue
     const promesaLectura = leerArchivo(ruta)
     arregloPromesasLectura.push(promesaLectura)
   }

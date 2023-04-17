@@ -1,6 +1,6 @@
 import {
   convertirARutaAbsoluta, leerDirectorio, obtenerArchivos, verificarCodigoEstadoHttp,
-  verificarRuta, leerArchivo, esDirectorio, convertirTextoMDEnHtml, verificarArchivoMD,
+  existeRuta, leerArchivo, esDirectorio, convertirTextoMDEnHtml, esArchivoMD,
   seleccionarEtiquetasADeHtml, buscarTextoEnLineas, calcularCantidadUnique, calcularCantidadBroken
 } from '../src/funciones.js'
 import path from 'path';
@@ -65,33 +65,33 @@ describe('seleccionarEtiquetasADeHtml', () => {
   })
 });
 
-describe('verificarRuta', () => {
+describe('existeRuta', () => {
   it('esto debe ser una funcion', () => {
-    expect(typeof verificarRuta).toBe('function')
+    expect(typeof existeRuta).toBe('function')
   });
 
   it('Le entrego una ruta que existe y me retorna true', () => {
-    expect(verificarRuta("./test.md")).toBe(true)
+    expect(existeRuta("./test.md")).toBe(true)
   })
 
   it('Le entrego una ruta que no existe y me retorna false', () => {
-    expect(verificarRuta("./testNoExiste.md")).toBe(false)
+    expect(existeRuta("./testNoExiste.md")).toBe(false)
   })
 
 });
 
-describe('verificarArchivoMD', () => {
+describe('esArchivoMD', () => {
 
   it('esto debe ser una funcion', () => {
-    expect(typeof verificarArchivoMD).toBe('function')
+    expect(typeof esArchivoMD).toBe('function')
   });
 
   it('Se entrega la ruta de un archivo md deberia retornar true', () => {
-    expect(verificarArchivoMD("./testa.md")).toBe(true)
+    expect(esArchivoMD("./testa.md")).toBe(true)
   })
 
   it('Se entrega la ruta de un archivo que no es md deberia retornar false', () => {
-    expect(verificarArchivoMD("./thumb.png")).toBe(false)
+    expect(esArchivoMD("./thumb.png")).toBe(false)
   })
 });
 
