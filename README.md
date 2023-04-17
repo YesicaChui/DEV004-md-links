@@ -17,11 +17,11 @@
 
 ## 1. Introducción
 
-En este link se construyo una api para leer links de un archivo MD, y se uso dicha api desde un aplicación de terminal CLI para que nos de información adicional de cada link del archivo MD, la libreria esta disponible desde npm install.
+En este proyecto se construyo una api para leer links de un archivo MD, y se uso la api desde un aplicación de terminal CLI para que nos de información adicional de cada link del archivo MD, la libreria esta disponible desde npm install.
 
 ## 2. Resumen del proyecto
 
-En el primer Sprint se inicio con la primera versión del diagrama de flujo, en el segundo sprint se finalizo el diagrama de flujo y se realizo un caso ideal para usar la primera versión de la api desde el CLI para usarlo sin options y con --stats mostrando la cantidad de link encontrados, en el 3er Sprint en el CLI se considera un segundo argumento options que puede tener el valor true o false, y en el CLI se considero --stats, --validate y --stats junto con --validate, en el 4to Sprint se considera la lectura de archivos de forma asincrona, información de la linea donde se encuentra el link encontrado en el archivo MD se realizaron los test unitarios y se volvio modulo instalable con npm install
+En el primer Sprint se inicio con la primera versión del diagrama de flujo, en el segundo sprint se finalizo el diagrama de flujo y se realizo un caso ideal para usar la primera versión de la api desde el CLI, para usarlo sin options y con --stats mostrando la cantidad de link encontrados, en el 3er Sprint en el CLI se considera un segundo argumento options que puede tener el valor true o false, y en el CLI se considero --stats, --validate y --stats junto con --validate, en el 4to Sprint se considera la lectura de archivos de forma asincrona, información de la linea donde se encuentra el link encontrado en el archivo MD, se realizaron los test unitarios y se volvio modulo instalable con npm install
 
 ## 3. Diagramas de Flujo del Proyecto
 
@@ -163,7 +163,7 @@ Con `validate:true` :
 
 * [ x ] Un board con el backlog para la implementación de la librería.
 * [ x ] Documentación técnica de la librería.
-* [ x ] Guía de uso e instalación de la librería
+* [ x ] Guía de instalación de la librería
 
 ### API `mdLinks(path, opts)`
 
